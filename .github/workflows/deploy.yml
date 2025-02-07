@@ -1,0 +1,17 @@
+name: Deployment
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Optionally: add steps to build your package using uv, make, or Docker.
+      - name: Build and Deploy
+        run: |
+          # Example: Build Docker image and push to registry
+          docker build -t your-image-name .
+          docker push your-image-name

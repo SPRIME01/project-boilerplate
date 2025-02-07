@@ -1,0 +1,32 @@
+[project]
+name = "project-boilerplate"
+version = "0.1.0"
+description = "A boilerplate project implementing DDD, FastAPI, GraphQL, and event-driven architecture."
+authors = [
+    { name = "Your Name", email = "you@example.com" }
+]
+requires-python = ">=3.9,<3.13"
+dependencies = [
+    "fastapi>=0.85.0",
+    "uvicorn>=0.18.0",
+    "graphene>=3.0.0",  # or any other GraphQL library of your choice
+    "pika>=1.2.0",      # for RabbitMQ integration
+    "opentelemetry-api>=1.12.0",
+    "opentelemetry-sdk>=1.12.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "pytest-bdd>=5.0.0",
+    "ruff>=0.0.241",
+    "mypy>=0.931",
+    "pre-commit",
+]
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages]
+find = { where = ["."], include = ["application*", "domain*", "infrastructure*", "presentation*"] }

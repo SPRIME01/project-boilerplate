@@ -1,0 +1,29 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python Environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          pip install uv
+          uv pip install .
+
+      - name: Run Pre-Commit Hooks
+        run: uv run pre-commit run --all-files
+
+      - name: Run Tests
+        run: uv run pytest --maxfail=1 --disable-warnings -q
